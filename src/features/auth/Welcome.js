@@ -17,11 +17,15 @@ const Welcome = () => {
             <p>{today}</p>
 
             <h1>Welcome {username}!</h1>
+
+            <p><Link to="/dash/form1s">View Form1s</Link></p>
+
+            <p><Link to="/dash/form1s/new">Add New Form1</Link></p>
             
             {(isManager || isAdmin) && <p><Link to="/dash/users">View User Settings</Link></p>}
 
             {(isManager || isAdmin) && <p><Link to="/dash/users/new">Add New User</Link></p>}
-
+            
         </section>
     )
 

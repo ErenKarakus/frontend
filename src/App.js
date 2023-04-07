@@ -5,8 +5,11 @@ import Login from './features/auth/Login'
 import DashLayout from './components/DashLayout'
 import Welcome from './features/auth/Welcome'
 import UsersList from './features/users/UsersList'
+import Form1sList from './features/form1/Form1sList'
 import EditUser from './features/users/EditUser'
 import NewUserForm from './features/users/NewUserForm'
+import EditForm1 from './features/form1/EditForm1'
+import NewForm1 from './features/form1/NewForm1'
 import Prefetch from './features/auth/PreFetch'
 import PersistLogin from './features/auth/PersistLogin'
 import RequireAuth from './features/auth/RequireAuth'
@@ -37,6 +40,12 @@ function App() {
                 <Route path=":id" element={<EditUser />} />
                 <Route path="new" element={<NewUserForm />} />
               </Route>
+            </Route>
+            
+            <Route path="form1s">
+              <Route index element={<Form1sList />} />
+              <Route path=":id" element={<EditForm1 />} />
+              <Route path="new" element={<NewForm1 />} />
             </Route>
 
           </Route>{/* End Dash */}

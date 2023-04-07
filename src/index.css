@@ -17,7 +17,7 @@
   --INACTIVE: lightgray;
   --LINK-COLOR: whitesmoke;
   --LINK-HOVER: rgba(245, 245, 245, 0.9);
-  --NOTE-BGCOLOR: hsla(240, 64%, 27%, 0.65);
+  --FORM1-BGCOLOR: hsla(240, 64%, 27%, 0.65);
   --STATUS-COMPLETE: limegreen;
   --STATUS-OPEN: firebrick;
   --TABLE-BGCOLOR: #FFF;
@@ -233,23 +233,23 @@ tr {
   background-color: var(--INACTIVE);
 }
 
-/* ||  NOTE */
+/* ||  FORM1 */
 
-.note__created,
-.note__updated,
-.note__username {
+.form1__created,
+.form1__updated,
+.form1__username {
   display: none;
 }
 
-.note__status {
+.form1__status {
   font-weight: bold;
 }
 
-.note__status--open {
+.form1__status--open {
   color: var(--STATUS-OPEN);
 }
 
-.note__status--completed {
+.form1__status--completed {
   color: var(--STATUS-COMPLETE);
 }
 
@@ -362,13 +362,13 @@ tr {
     font-size: 1.5rem;
   }
 
-  .table--notes {
+  .table--form1s {
     grid-template-columns: repeat(3, 1fr) 2fr repeat(2, 1fr);
   }
 
-  .note__created,
-  .note__updated,
-  .note__username {
+  .form1__created,
+  .form1__updated,
+  .form1__username {
     display: block
   }
 

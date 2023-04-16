@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import useAuth from '../../hooks/useAuth'
 
-const EditForm1Form = () => ({ form1, users }) => {
+const EditForm1Form = ({ form1, users }) => {
 
     const  { isManager, isAdmin } = useAuth()
 
@@ -19,20 +19,20 @@ const EditForm1Form = () => ({ form1, users }) => {
     const [deleteForm1, {
         isSuccess: isDelSuccess,
         isError: isDelError,
-        error: delError
+        error: delerror
     }] = useDeleteForm1Mutation()
 
     const navigate = useNavigate()
 
-    const [q1, setQ1] = useState('')
-    const [q2, setQ2] = useState('')
-    const [q3a, setQ3a] = useState('')
-    const [q3b, setQ3b] = useState('')
-    const [q3c, setQ3c] = useState('')
-    const [q3d, setQ3d] = useState('')
-    const [q3e, setQ3e] = useState('')
-    const [q4, setQ4] = useState('')
-    const [q5, setQ5] = useState('')
+    const [q1, setQ1] = useState(form1.q1)
+    const [q2, setQ2] = useState(form1.q2)
+    const [q3a, setQ3a] = useState(form1.q3a)
+    const [q3b, setQ3b] = useState(form1.q3b)
+    const [q3c, setQ3c] = useState(form1.q3c)
+    const [q3d, setQ3d] = useState(form1.q3d)
+    const [q3e, setQ3e] = useState(form1.q3e)
+    const [q4, setQ4] = useState(form1.q4)
+    const [q5, setQ5] = useState(form1.q5)
     const [userId, setUserId] = useState(form1.user)
 
     useEffect(() => {
@@ -63,17 +63,48 @@ const EditForm1Form = () => ({ form1, users }) => {
     const onQ5Changed = e => setQ5(e.target.value)
     //const onUserIdChanged = e => setUserId(e.target.value)
 
-    const canSave = [q1, q2, q3a, q3b, q3c, q3d, q3e, q4, q5, userId].every(Boolean) && !isLoading
+    // const canSave = [q1, q2, q3a, q3b, q3c, q3d, q3e, q4, q5, userId].every(Boolean) && !isLoading
+
+    // const onSaveForm1Clicked = async (e) => {
+    //     if (canSave) {
+    //         await updateForm1({ id: form1.id, q1, q2, q3a, q3b, q3c, q3d, q3e, q4, q5 })
+    //     }
+    // }
+
+    const hasChanges = q1 !== form1.q1 || q2 !== form1.q2 || q3a !== form1.q3a || q3b !== form1.q3b || q3c !== form1.q3c || q3d !== form1.q3d || q3e !== form1.q3e || q4 !== form1.q4 || q5 !== form1.q5 || userId !== form1.user;
+
+    const canSave = hasChanges && !isLoading;
 
     const onSaveForm1Clicked = async (e) => {
-        if (canSave) {
-            await updateForm1({ id: form1.id, user: userId, q1, q2, q3a, q3b, q3c, q3d, q3e, q4, q5 })
-        }
-    }
+        const updatedFields = {};
+        if (q1 !== form1.q1) updatedFields.q1 = q1;
+        if (q2 !== form1.q2) updatedFields.q2 = q2;
+        if (q3a !== form1.q3a) updatedFields.q3a = q3a;
+        if (q3b !== form1.q3b) updatedFields.q3b = q3b;
+        if (q3c !== form1.q3c) updatedFields.q3c = q3c;
+        if (q3d !== form1.q3d) updatedFields.q3d = q3d;
+        if (q3e !== form1.q3e) updatedFields.q3e = q3e;
+        if (q4 !== form1.q4) updatedFields.q4 = q4;
+        if (q5 !== form1.q5) updatedFields.q5 = q5;
+        if (userId !== form1.user) updatedFields.userId = userId;
+    
+        await updateForm1({ id: form1.id, ...updatedFields });
+    };
+    
+
 
     const onDeleteForm1Clicked = async () => {
         await deleteForm1({ id: form1.id })
     }
+
+    // const options = users.map(user => {
+    //     return (
+    //         <option 
+    //             key={user.id} 
+    //             value={user.id}
+    //         >{user.username}</option>
+    //     )
+    // })
 
     const errClass = (isError || isDelError) ? "errmsg" : "offscreen"
     const validQ1Class= !q1 ? "form__input--incomplete" : ''
@@ -210,3 +241,4 @@ const EditForm1Form = () => ({ form1, users }) => {
 }
 
 export default EditForm1Form
+

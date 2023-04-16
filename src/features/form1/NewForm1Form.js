@@ -99,7 +99,8 @@ const NewForm1Form = ({ users }) => {
                         </button>
                     </div>
                 </div>
-                <label className="form__label" htmlFor="q1">Q1:</label>
+                <label className="form__label" htmlFor="q1">
+                    Q1: Your date of birth – it helps get your tax right DD MM YYYY</label>
                 <input
                     className={`form__input ${validQ1Class}`}
                     id="q1"
@@ -110,7 +111,8 @@ const NewForm1Form = ({ users }) => {
                     onChange={onQ1Changed}
                 />
 
-                <label className="form__label" htmlFor="q2">Q2:</label>
+                <label className="form__label" htmlFor="q2">
+                    Q2: Your name</label>
                 <input
                     className={`form__input ${validQ2Class}`}
                     id="q2"
@@ -119,7 +121,8 @@ const NewForm1Form = ({ users }) => {
                     onChange={onQ2Changed}
                 />
 
-                <label className="form__label" htmlFor="q3a">Q3a:</label>
+                <label className="form__label" htmlFor="q3a">
+                    Q3a: Address line 1</label>
                 <input
                     className={`form__input ${validQ3aClass}`}
                     id="q3a"
@@ -128,7 +131,8 @@ const NewForm1Form = ({ users }) => {
                     onChange={onQ3aChanged}
                 />
 
-                <label className="form__label" htmlFor="q3b">Q3b:</label>
+                <label className="form__label" htmlFor="q3b">
+                    Q3b: Address line 2</label>
                 <input
                     className={`form__input ${validQ3bClass}`}
                     id="q3b"
@@ -137,7 +141,8 @@ const NewForm1Form = ({ users }) => {
                     onChange={onQ3bChanged}
                 />
 
-                <label className="form__label" htmlFor="q3c">Q3c:</label>
+                <label className="form__label" htmlFor="q3c">
+                    Q3c: Town/City</label>
                 <input
                     className={`form__input ${validQ3cClass}`}
                     id="q3c"
@@ -146,7 +151,8 @@ const NewForm1Form = ({ users }) => {
                     onChange={onQ3cChanged}
                 />
 
-                <label className="form__label" htmlFor="q3d">Q3d:</label>
+                <label className="form__label" htmlFor="q3d">
+                    Q3d: County</label>
                 <input
                     className={`form__input ${validQ3dClass}`}
                     id="q3d"
@@ -155,7 +161,8 @@ const NewForm1Form = ({ users }) => {
                     onChange={onQ3dChanged}
                 />
 
-                <label className="form__label" htmlFor="q3e">Q3e:</label>
+                <label className="form__label" htmlFor="q3e">
+                    Q3e: Postcode</label>
                 <input
                     className={`form__input ${validQ3eClass}`}
                     id="q3e"
@@ -164,7 +171,8 @@ const NewForm1Form = ({ users }) => {
                     onChange={onQ3eChanged}
                 />
 
-                <label className="form__label" htmlFor="q4">Q4:</label>
+                <label className="form__label" htmlFor="q4">
+                    Q4: Phone number</label>
                 <input
                     className={`form__input ${validQ4Class}`}
                     id="q4"
@@ -173,7 +181,8 @@ const NewForm1Form = ({ users }) => {
                     onChange={onQ4Changed}
                 />
 
-                <label className="form__label" htmlFor="q5">Q5:</label>
+                <label className="form__label" htmlFor="q5">
+                    Q5: Your National Insurance number</label>
                 <input
                     className={`form__input ${validQ5Class}`}
                     id="q5"

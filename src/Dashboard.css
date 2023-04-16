@@ -1,0 +1,23 @@
+.welcome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+  }
+  
+  .grid-container {
+    display: flex;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+    max-width: 80%;
+    margin: 0 auto;
+  }
+  
+  .grid-item {
+    background-color: #0F172A;
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  

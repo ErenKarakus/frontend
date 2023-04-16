@@ -45,7 +45,6 @@ const Form1sList = () => {
             <table className="table table--form1s">
                 <thead className="table__thead">
                     <tr>
-                        <th scope="col" className="table__th form1__status">Username</th>
                         <th scope="col" className="table__th form1__created">Created</th>
                         <th scope="col" className="table__th form1__updated">Updated</th>
                         <th scope="col" className="table__th form1__username">Owner</th>

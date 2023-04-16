@@ -63,7 +63,15 @@ const EditForm1Form = ({ form1, users }) => {
     const onQ5Changed = e => setQ5(e.target.value)
     //const onUserIdChanged = e => setUserId(e.target.value)
 
-    // const canSave = [q1, q2, q3a, q3b, q3c, q3d, q3e, q4, q5, userId].every(Boolean) && !isLoading
+    const canSave = [q1, q2, q3a, q3b, q3c, q3d, q3e, q4, q5, userId].every(Boolean) && !isLoading
+
+    const onSaveForm1Clicked = async (e) => {
+        if (canSave) {
+            await updateForm1({ id: form1.id, user: userId, q1, q2, q3a, q3b, q3c, q3d, q3e, q4, q5 })
+        }
+    }   
+
+    // const canSave = [q1 !== form1.q1 || q2 !== form1.q2 || q3a !== form1.q3a || q3b !== form1.q3b || q3c !== form1.q3c || q3d !== form1.q3d || q3e !== form1.q3e || q4 !== form1.q4 || q5 !== form1.q5 || userId].every(Boolean) && !isLoading
 
     // const onSaveForm1Clicked = async (e) => {
     //     if (canSave) {
@@ -71,25 +79,25 @@ const EditForm1Form = ({ form1, users }) => {
     //     }
     // }
 
-    const hasChanges = q1 !== form1.q1 || q2 !== form1.q2 || q3a !== form1.q3a || q3b !== form1.q3b || q3c !== form1.q3c || q3d !== form1.q3d || q3e !== form1.q3e || q4 !== form1.q4 || q5 !== form1.q5 || userId !== form1.user;
+    // const hasChanges = q1 !== form1.q1 || q2 !== form1.q2 || q3a !== form1.q3a || q3b !== form1.q3b || q3c !== form1.q3c || q3d !== form1.q3d || q3e !== form1.q3e || q4 !== form1.q4 || q5 !== form1.q5 || userId !== form1.user;
 
-    const canSave = hasChanges && !isLoading;
+    // const canSave = hasChanges && !isLoading;
 
-    const onSaveForm1Clicked = async (e) => {
-        const updatedFields = {};
-        if (q1 !== form1.q1) updatedFields.q1 = q1;
-        if (q2 !== form1.q2) updatedFields.q2 = q2;
-        if (q3a !== form1.q3a) updatedFields.q3a = q3a;
-        if (q3b !== form1.q3b) updatedFields.q3b = q3b;
-        if (q3c !== form1.q3c) updatedFields.q3c = q3c;
-        if (q3d !== form1.q3d) updatedFields.q3d = q3d;
-        if (q3e !== form1.q3e) updatedFields.q3e = q3e;
-        if (q4 !== form1.q4) updatedFields.q4 = q4;
-        if (q5 !== form1.q5) updatedFields.q5 = q5;
-        if (userId !== form1.user) updatedFields.userId = userId;
+    // const onSaveForm1Clicked = async (e) => {
+    //     const updatedFields = {};
+    //     if (q1 !== form1.q1) updatedFields.q1 = q1;
+    //     if (q2 !== form1.q2) updatedFields.q2 = q2;
+    //     if (q3a !== form1.q3a) updatedFields.q3a = q3a;
+    //     if (q3b !== form1.q3b) updatedFields.q3b = q3b;
+    //     if (q3c !== form1.q3c) updatedFields.q3c = q3c;
+    //     if (q3d !== form1.q3d) updatedFields.q3d = q3d;
+    //     if (q3e !== form1.q3e) updatedFields.q3e = q3e;
+    //     if (q4 !== form1.q4) updatedFields.q4 = q4;
+    //     if (q5 !== form1.q5) updatedFields.q5 = q5;
+    //     if (userId !== form1.user) updatedFields.userId = userId;
     
-        await updateForm1({ id: form1.id, ...updatedFields });
-    };
+    //     await updateForm1({ id: form1.id, ...updatedFields });
+    // }
     
 
 
@@ -151,7 +159,8 @@ const EditForm1Form = ({ form1, users }) => {
                         {deleteButton}
                     </div>
                 </div>
-                <label className="form__label" htmlFor="q1">Q1:</label>
+                <label className="form__label" htmlFor="q1">
+                    Q1: Your date of birth – it helps get your tax right DD MM YYYY</label>
                 <input
                     className={`form__input ${validQ1Class}`}
                     id="q1"
@@ -162,7 +171,8 @@ const EditForm1Form = ({ form1, users }) => {
                     onChange={onQ1Changed}
                 />
 
-                <label className="form__label" htmlFor="q2">Q2:</label>
+                <label className="form__label" htmlFor="q2">
+                    Q2: Your name</label>
                 <input
                     className={`form__input ${validQ2Class}`}
                     id="q2"
@@ -171,7 +181,8 @@ const EditForm1Form = ({ form1, users }) => {
                     onChange={onQ2Changed}
                 />
 
-                <label className="form__label" htmlFor="q3a">Q3a:</label>
+                <label className="form__label" htmlFor="q3a">
+                    Q3a: Address line 1</label>
                 <input
                     className={`form__input ${validQ3aClass}`}
                     id="q3a"
@@ -180,7 +191,8 @@ const EditForm1Form = ({ form1, users }) => {
                     onChange={onQ3aChanged}
                 />
 
-                <label className="form__label" htmlFor="q3b">Q3b:</label>
+                <label className="form__label" htmlFor="q3b">
+                    Q3b: Address line 2</label>
                 <input
                     className={`form__input ${validQ3bClass}`}
                     id="q3b"
@@ -189,7 +201,8 @@ const EditForm1Form = ({ form1, users }) => {
                     onChange={onQ3bChanged}
                 />
 
-                <label className="form__label" htmlFor="q3c">Q3c:</label>
+                <label className="form__label" htmlFor="q3c">
+                    Q3c: Town/City</label>
                 <input
                     className={`form__input ${validQ3cClass}`}
                     id="q3c"
@@ -198,7 +211,8 @@ const EditForm1Form = ({ form1, users }) => {
                     onChange={onQ3cChanged}
                 />
 
-                <label className="form__label" htmlFor="q3d">Q3d:</label>
+                <label className="form__label" htmlFor="q3d">
+                    Q3d: County</label>
                 <input
                     className={`form__input ${validQ3dClass}`}
                     id="q3d"
@@ -207,7 +221,8 @@ const EditForm1Form = ({ form1, users }) => {
                     onChange={onQ3dChanged}
                 />
 
-                <label className="form__label" htmlFor="q3e">Q3e:</label>
+                <label className="form__label" htmlFor="q3e">
+                    Q3e: Postcode</label>
                 <input
                     className={`form__input ${validQ3eClass}`}
                     id="q3e"
@@ -216,7 +231,8 @@ const EditForm1Form = ({ form1, users }) => {
                     onChange={onQ3eChanged}
                 />
 
-                <label className="form__label" htmlFor="q4">Q4:</label>
+                <label className="form__label" htmlFor="q4">
+                    Q4: Phone number</label>
                 <input
                     className={`form__input ${validQ4Class}`}
                     id="q4"
@@ -225,7 +241,8 @@ const EditForm1Form = ({ form1, users }) => {
                     onChange={onQ4Changed}
                 />
 
-                <label className="form__label" htmlFor="q5">Q5:</label>
+                <label className="form__label" htmlFor="q5">
+                    Q5: Your National Insurance number</label>
                 <input
                     className={`form__input ${validQ5Class}`}
                     id="q5"

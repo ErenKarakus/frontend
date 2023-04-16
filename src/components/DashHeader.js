@@ -5,7 +5,8 @@ import {
     faFilePen,
     faUserGear,
     faUserPlus,
-    faRightFromBracket 
+    faRightFromBracket,
+    faSquare1
 } from "@fortawesome/free-solid-svg-icons"
 import { useNavigate, Link, useLocation } from 'react-router-dom'
 import { useSendLogoutMutation } from '../features/auth/authApiSlice'
@@ -14,6 +15,7 @@ import PulseLoader from 'react-spinners/PulseLoader'
 
 const DASH_REGEX = /^\/dash(\/)?$/
 const FORM1S_REGEX = /^\/dash\/FORMS1(\/)?$/
+const FORM2S_REGEX = /^\/dash\/FORMS2(\/)?$/
 const USERS_REGEX = /^\/dash\/users(\/)?$/
 
 const DashHeader = () => {
@@ -34,15 +36,17 @@ const DashHeader = () => {
     }, [isSuccess, navigate])
 
     const onNewForm1Clicked = () => navigate('/dash/form1s/new')
-    const onNewUserClicked = () => navigate('/dash/users/new')
     const onForm1sClicked = () => navigate('/dash/form1s')
+    const onNewForm2Clicked = () => navigate('/dash/form2s/new')
+    const onForm2sClicked = () => navigate('/dash/form2s')
+    const onNewUserClicked = () => navigate('/dash/users/new')
     const onUsersClicked = () => navigate('/dash/users')
 
     let dashClass = null
-    if (!DASH_REGEX.test(pathname) && !FORM1S_REGEX.test(pathname) && !USERS_REGEX.test(pathname)) {
+    if (!DASH_REGEX.test(pathname) && !FORM1S_REGEX.test(pathname) && !FORM2S_REGEX.test(pathname) && !USERS_REGEX.test(pathname)) {
         dashClass = "dash-header__container--small"
     }
-
+ 
     let newForm1Button = null
     if (FORM1S_REGEX.test(pathname)) {
         newForm1Button = (
@@ -50,6 +54,19 @@ const DashHeader = () => {
                 className="icon-button"
                 title="New Form 1"
                 onClick={onNewForm1Clicked}
+            >
+                <FontAwesomeIcon icon={faFileCirclePlus} />
+            </button>
+        )
+    }
+
+    let newForm2Button = null
+    if (FORM2S_REGEX.test(pathname)) {
+        newForm2Button = (
+            <button
+                className="icon-button"
+                title="New Form 2"
+                onClick={onNewForm2Clicked}
             >
                 <FontAwesomeIcon icon={faFileCirclePlus} />
             </button>
@@ -92,6 +109,19 @@ const DashHeader = () => {
                 title="Form1s"
                 onClick={onForm1sClicked}
             >
+                <FontAwesomeIcon icon={faSquare1} />
+            </button>
+        )
+    }
+
+    let form2sButton = null
+    if (!FORM2S_REGEX.test(pathname) && pathname.includes('/dash')) {
+        form2sButton = (
+            <button
+                className="icon-button"
+                title="Form2s"
+                onClick={onForm2sClicked}
+            >
                 <FontAwesomeIcon icon={faFilePen} />
             </button>
         )
@@ -116,8 +146,10 @@ const DashHeader = () => {
         buttonContent = (
             <>  
                 {newForm1Button}
-                {newUserButton}
                 {form1sButton}
+                {newForm2Button}
+                {form2sButton}
+                {newUserButton}
                 {userButton}
                 {logoutButton}
             </>

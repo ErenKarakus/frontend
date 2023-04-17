@@ -2,11 +2,12 @@ import { useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { 
     faFileCirclePlus,
-    faFilePen,
+    //faFilePen,
     faUserGear,
     faUserPlus,
     faRightFromBracket,
-    faSquare1
+    fa1,
+    fa2
 } from "@fortawesome/free-solid-svg-icons"
 import { useNavigate, Link, useLocation } from 'react-router-dom'
 import { useSendLogoutMutation } from '../features/auth/authApiSlice'
@@ -109,7 +110,7 @@ const DashHeader = () => {
                 title="Form1s"
                 onClick={onForm1sClicked}
             >
-                <FontAwesomeIcon icon={faSquare1} />
+                <FontAwesomeIcon icon={fa1} />
             </button>
         )
     }
@@ -122,7 +123,7 @@ const DashHeader = () => {
                 title="Form2s"
                 onClick={onForm2sClicked}
             >
-                <FontAwesomeIcon icon={faFilePen} />
+                <FontAwesomeIcon icon={fa2} />
             </button>
         )
     }

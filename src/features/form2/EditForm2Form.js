@@ -1,33 +1,43 @@
-import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import { useAddNewForm2Mutation } from "./form2sApiSlice"
+import { useState, useEffect } from 'react'
+import { useUpdateForm2Mutation, useDeleteForm2Mutation } from './form2sApiSlice'
+import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSave } from "@fortawesome/free-solid-svg-icons"
+import { faSave, faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import useAuth from '../../hooks/useAuth'
 
-const NewForm2Form = ({ users }) => {
+const EditForm2Form = ({ form2, users }) => {
 
-    const [addNewForm2, {
+    const  { isManager, isAdmin } = useAuth()
+
+    const [updateForm2, {
         isLoading,
         isSuccess,
         isError,
         error
-    }] = useAddNewForm2Mutation()
+    }] = useUpdateForm2Mutation()
+
+    const [deleteForm2, {
+        isSuccess: isDelSuccess,
+        isError: isDelError,
+        error: delerror
+    }] = useDeleteForm2Mutation()
 
     const navigate = useNavigate()
 
-    const [q1, setQ1] = useState('')
-    const [q2, setQ2] = useState('')
-    const [q3, setQ3] = useState('')
-    const [q4, setQ4] = useState('')
-    const [q5, setQ5] = useState('')
-    const [q6, setQ6] = useState('')
-    const [q7, setQ7] = useState('')
-    const [q8, setQ8] = useState('')
-    const [q9, setQ9] = useState('')
-    const [userId, setUserId] = useState(users[0].id)
+    const [q1, setQ1] = useState(form2.q1)
+    const [q2, setQ2] = useState(form2.q2)
+    const [q3, setQ3] = useState(form2.q3)
+    const [q4, setQ4] = useState(form2.q4)
+    const [q5, setQ5] = useState(form2.q5)
+    const [q6, setQ6] = useState(form2.q6)
+    const [q7, setQ7] = useState(form2.q7)
+    const [q8, setQ8] = useState(form2.q8)
+    const [q9, setQ9] = useState(form2.q9)
+    const [userId, setUserId] = useState(form2.user)
 
     useEffect(() => {
-        if (isSuccess) {
+
+        if (isSuccess || isDelSuccess) {
             setQ1('')
             setQ2('')
             setQ3('')
@@ -40,7 +50,7 @@ const NewForm2Form = ({ users }) => {
             setUserId('')
             navigate('/dash/form2s')
         }
-    }, [isSuccess, navigate])
+    }, [isSuccess, isDelSuccess, navigate])
 
     const onQ1Changed = e => setQ1(e.target.value)
     const onQ2Changed = e => setQ2(e.target.value)
@@ -56,13 +66,16 @@ const NewForm2Form = ({ users }) => {
     const canSave = [q1, q2, q3, q4, q5, q6, q7, q8, q9, userId].every(Boolean) && !isLoading
 
     const onSaveForm2Clicked = async (e) => {
-        e.preventDefault()
         if (canSave) {
-            await addNewForm2({ user: userId, q1, q2, q3, q4, q5, q6, q7, q8, q9 })
+            await updateForm2({ id: form2.id, user: userId, q1, q2, q3, q4, q5, q6, q7, q8, q9 })
         }
+    }     
+
+    const onDeleteForm2Clicked = async () => {
+        await deleteForm2({ id: form2.id })
     }
 
-    const errClass = isError ? "errmsg" : "offscreen"
+    const errClass = (isError || isDelError) ? "errmsg" : "offscreen"
     const validQ1Class= !q1 ? "form__input--incomplete" : ''
     const validQ2Class= !q2 ? "form__input--incomplete" : ''
     const validQ3Class= !q3 ? "form__input--incomplete" : ''
@@ -73,21 +86,38 @@ const NewForm2Form = ({ users }) => {
     const validQ8Class= !q8 ? "form__input--incomplete" : ''
     const validQ9Class= !q9 ? "form__input--incomplete" : ''
 
+    const errContent = (error?.data?.message || delerror?.data?.message) ?? ''
+
+    let deleteButton = null
+    if (isManager || isAdmin) {
+        deleteButton = (
+            <button
+                className="icon-button"
+                title='Delete'
+                onClick={onDeleteForm2Clicked}
+            >
+                <FontAwesomeIcon icon={faTrashCan} />
+            </button>
+        )
+    }
+
     const content = (
         <>
-            <p className={errClass}>{error?.data?.message}</p>
+            <p className={errClass}>{errContent}</p>
 
-            <form className="form" onSubmit={onSaveForm2Clicked}>
+            <form className="form" onSubmit={e => e.preventDefault()}>
                 <div className="form__title-row">
-                    <h1>New Form2</h1>
+                    <h2>Edit Form2 #{form2.ticket}</h2>
                     <div className="form__action-buttons">
-                        <button
-                            className="form__button"
-                            title="Save"
+                        <button 
+                            className="icon-button"
+                            title='Save'
+                            onClick={onSaveForm2Clicked}
                             disabled={!canSave}
                         >
                             <FontAwesomeIcon icon={faSave} />
                         </button>
+                        {deleteButton}
                     </div>
                 </div>
                 <label className="form__label" htmlFor="q1">
@@ -250,13 +280,12 @@ const NewForm2Form = ({ users }) => {
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                 </select>
-
-
-            </form>    
+            </form>   
         </>
     )
 
     return content
 }
 
-export default NewForm2Form
+export default EditForm2Form
+

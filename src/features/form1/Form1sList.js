@@ -14,7 +14,7 @@ const Form1sList = () => {
         isLoading,
         isSuccess,
         isError,
-        error,
+        error
     } = useGetForm1sQuery('form1sList', {
         pollingInterval: 15000,
         refetchOnfocus: true,
@@ -26,7 +26,7 @@ const Form1sList = () => {
     if (isLoading) content = <PulseLoader color={"#FFF"} />
 
     if (isError) {
-        content = <p className="errmsg">{error?.data.message}</p>
+        content = <p className="errmsg">{error?.data?.message}</p>
     }
 
     if (isSuccess) {

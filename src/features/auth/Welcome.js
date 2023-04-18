@@ -62,6 +62,7 @@ const Welcome = () => {
             <Link to="/dash/form1s/new">Add New Form1</Link>
           </p>
         </div>
+
         <div className="grid-item">
           <p>
             <Link to="/dash/form2s">View Form2s</Link>
@@ -70,6 +71,7 @@ const Welcome = () => {
             <Link to="/dash/form2s/new">Add New Form2</Link>
           </p>
         </div>
+        
         <div className="grid-item">
           <p>
             <Link to="/dash/form3s">View Form3s</Link>

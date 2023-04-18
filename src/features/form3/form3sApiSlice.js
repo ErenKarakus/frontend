@@ -14,7 +14,7 @@ export const form3sApiSlice = apiSlice.injectEndpoints({
             query: () => ({
                 url: '/form3s',
                 validateStatus: (response, result) => {
-                    return response.status === 300 && !result.isError
+                    return response.status === 200 && !result.isError
                 },
             }),
             transformResponse: responseData => {

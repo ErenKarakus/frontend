@@ -14,9 +14,9 @@ const Form3sList = () => {
         isLoading,
         isSuccess,
         isError,
-        error,
+        error
     } = useGetForm3sQuery('form3sList', {
-        pollingInterval: 25000,
+        pollingInterval: 15000,
         refetchOnfocus: true,
         refetchOnMountOrArgChange: true
     })
@@ -26,7 +26,8 @@ const Form3sList = () => {
     if (isLoading) content = <PulseLoader color={"#FFF"} />
 
     if (isError) {
-        content = <p className="errmsg">{error?.data.message}</p>
+        console.log("Error object:", error);
+        content = <p className="errmsg">{error?.data?.message}</p>
     }
 
     if (isSuccess) {
@@ -42,13 +43,13 @@ const Form3sList = () => {
         const tableContent = ids?.length && filteredIds.map(form3Id => <Form3 key={form3Id} form3Id={form3Id} />)
 
         content = (
-            <table className="table table--form2s">
+            <table className="table table--form3s">
                 <thead className="table__thead">
                     <tr>
-                        <th scope="col" className="table__th form2__created">Created</th>
-                        <th scope="col" className="table__th form2__updated">Updated</th>
-                        <th scope="col" className="table__th form2__username">Owner</th>
-                        <th scope="col" className="table__th form2__edit">Edit</th>
+                        <th scope="col" className="table__th form3__created">Created</th>
+                        <th scope="col" className="table__th form3__updated">Updated</th>
+                        <th scope="col" className="table__th form3__username">Owner</th>
+                        <th scope="col" className="table__th form3__edit">Edit</th>
                     </tr>
                 </thead>
                 <tbody>

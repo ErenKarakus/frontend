@@ -81,7 +81,7 @@ const DashHeader = () => {
 
     let newForm3Button = null
     if (FORM3S_REGEX.test(pathname)) {
-        newForm2Button = (
+        newForm3Button = (
             <button
                 className="icon-button"
                 title="New Form 3"

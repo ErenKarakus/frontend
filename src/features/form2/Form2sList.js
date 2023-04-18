@@ -14,9 +14,9 @@ const Form2sList = () => {
         isLoading,
         isSuccess,
         isError,
-        error,
+        error
     } = useGetForm2sQuery('form2sList', {
-        pollingInterval: 25000,
+        pollingInterval: 15000,
         refetchOnfocus: true,
         refetchOnMountOrArgChange: true
     })
@@ -26,7 +26,7 @@ const Form2sList = () => {
     if (isLoading) content = <PulseLoader color={"#FFF"} />
 
     if (isError) {
-        content = <p className="errmsg">{error?.data.message}</p>
+        content = <p className="errmsg">{error?.data?.message}</p>
     }
 
     if (isSuccess) {

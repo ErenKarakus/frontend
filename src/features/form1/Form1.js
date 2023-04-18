@@ -26,9 +26,9 @@ const Form1 = ({ form1Id }) => {
 
         return (
             <tr className="table__row">
-                <td className="table__cell form1__created">{created}</td>
-                <td className="table__cell form1__updated">{updated}</td>
-                <td className="table__cell form1__username">{form1.q2}</td>
+                <td className="table__cell form__username">{form1.username}</td>
+                <td className="table__cell form__created">{created}</td>
+                <td className="table__cell form__updated">{updated}</td>
                 
                 <td className="table__cell">
                     <button

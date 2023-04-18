@@ -35,9 +35,14 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth';
 import useTitle from '../../hooks/useTitle';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { 
+  faFileCirclePlus,
+  faFolderOpen
+} from "@fortawesome/free-solid-svg-icons"
 
 const Welcome = () => {
   const { username, isManager, isAdmin } = useAuth();
@@ -53,13 +58,22 @@ const Welcome = () => {
           <p>{today}</p>
           <h1>Welcome {username}</h1>
         </div>
+
+
         <div className="grid-container">
         <div className="grid-item">
+          <h1>FORM 1</h1>
           <p>
-            <Link to="/dash/form1s">View Form1s</Link>
+            View Form1s
+            <Link to="/dash/form1s" className='icon-button'>
+              <FontAwesomeIcon icon={faFolderOpen}/>            
+            </Link>
           </p>
           <p>
-            <Link to="/dash/form1s/new">Add New Form1</Link>
+            Add New Form1
+            <Link to="/dash/form1s/new" className='icon-button'>
+              <FontAwesomeIcon icon={faFileCirclePlus}/>
+            </Link>
           </p>
         </div>
 
@@ -78,6 +92,15 @@ const Welcome = () => {
           </p>
           <p>
             <Link to="/dash/form3s/new">Add New Form3</Link>
+          </p>
+        </div>
+
+        <div className="grid-item">
+          <p>
+            <Link to="/dash/form4s">View Form4s</Link>
+          </p>
+          <p>
+            <Link to="/dash/form4s/new">Add New Form4</Link>
           </p>
         </div>
 

@@ -10,12 +10,15 @@ import UsersList from './features/users/UsersList'
 import Form1sList from './features/form1/Form1sList'
 import Form2sList from './features/form2/Form2sList'
 import Form3sList from './features/form3/Form3sList'
+import Form4sList from './features/form4/Form4sList'
 import EditForm1 from './features/form1/EditForm1'
 import EditForm2 from './features/form2/EditForm2'
 import EditForm3 from './features/form3/EditForm3'
+import EditForm4 from './features/form4/EditForm4'
 import NewForm1 from './features/form1/NewForm1'
 import NewForm2 from './features/form2/NewForm2'
 import NewForm3 from './features/form3/NewForm3'
+import NewForm4 from './features/form4/NewForm4'
 import Prefetch from './features/auth/PreFetch'
 import PersistLogin from './features/auth/PersistLogin'
 import RequireAuth from './features/auth/RequireAuth'
@@ -64,6 +67,12 @@ function App() {
               <Route index element={<Form3sList />} />
               <Route path=":id" element={<EditForm3 />} />
               <Route path="new" element={<NewForm3 />} />
+            </Route>
+
+            <Route path="form4s">
+              <Route index element={<Form4sList />} />
+              <Route path=":id" element={<EditForm4 />} />
+              <Route path="new" element={<NewForm4 />} />
             </Route>
 
           </Route>{/* End Dash */}

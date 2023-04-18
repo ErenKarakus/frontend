@@ -11,6 +11,7 @@
     grid-gap: 1rem;
     max-width: 80%;
     margin: 0 auto;
+    justify-content: space-between;
   }
   
   .grid-item {
@@ -19,5 +20,6 @@
     border-radius: 5px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: inline-block;
   }
   

@@ -1,47 +1,52 @@
-import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import { useAddNewForm3Mutation } from "./form3sApiSlice"
+import { useState, useEffect } from 'react'
+import { useUpdateForm4Mutation, useDeleteForm4Mutation } from './form4sApiSlice'
+import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSave } from "@fortawesome/free-solid-svg-icons"
+import { faSave, faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import useAuth from '../../hooks/useAuth'
 
-const NewForm3Form = ({ users }) => {
+const EditForm4Form = ({ form4, users }) => {
 
-    const [addNewForm3, {
+    const  { isManager, isAdmin } = useAuth()
+
+    const [updateForm4, {
         isLoading,
         isSuccess,
         isError,
         error
-    }] = useAddNewForm3Mutation()
+    }] = useUpdateForm4Mutation()
+
+    const [deleteForm4, {
+        isSuccess: isDelSuccess,
+        isError: isDelError,
+        error: delerror
+    }] = useDeleteForm4Mutation()
 
     const navigate = useNavigate()
 
-    const [q1, setQ1] = useState('')
-    const [q2, setQ2] = useState('')
-    const [q3, setQ3] = useState('')
-    const [q4, setQ4] = useState('')
-    const [q5, setQ5] = useState('')
-    const [q6, setQ6] = useState('')
-    const [q7, setQ7] = useState('')
-    const [q8, setQ8] = useState('')
-    const [q9, setQ9] = useState('')
-    const [q10, setQ10] = useState('')
-    const [q11, setQ11] = useState('')
-    const [q12, setQ12] = useState('')
-    const [q13, setQ13] = useState('')
-    const [q14, setQ14] = useState('')
-    const [q15, setQ15] = useState('')
-    const [q16, setQ16] = useState('')
-    const [q17, setQ17] = useState('')
-    const [q18, setQ18] = useState('')
-    const [q19, setQ19] = useState('')
-    const [q20, setQ20] = useState('')
-    const [q21, setQ21] = useState('')
-    const [userId, setUserId] = useState(users[0].id)
+    const [q1, setQ1] = useState(form4.q1)
+    const [q2, setQ2] = useState(form4.q2)
+    const [q3, setQ3] = useState(form4.q3)
+    const [q4, setQ4] = useState(form4.q4)
+    const [q5, setQ5] = useState(form4.q5)
+    const [q6, setQ6] = useState(form4.q6)
+    const [q7, setQ7] = useState(form4.q7)
+    const [q8, setQ8] = useState(form4.q8)
+    const [q9, setQ9] = useState(form4.q9)
+    const [q10, setQ10] = useState(form4.q10)
+    const [q11, setQ11] = useState(form4.q11)
+    const [q12, setQ12] = useState(form4.q12)
+    const [q13, setQ13] = useState(form4.q13)
+    const [q14, setQ14] = useState(form4.q14)
+    const [q15, setQ15] = useState(form4.q15)
+    const [q16, setQ16] = useState(form4.q16)
+    const [userId, setUserId] = useState(form4.user)
 
     useEffect(() => {
-        if (isSuccess) {
+
+        if (isSuccess || isDelSuccess) {
             setQ1('')
-            setQ2('')
+            setQ3('')
             setQ3('')
             setQ4('')
             setQ5('')
@@ -56,15 +61,10 @@ const NewForm3Form = ({ users }) => {
             setQ14('')
             setQ15('')
             setQ16('')
-            setQ17('')
-            setQ18('')
-            setQ19('')
-            setQ20('')
-            setQ21('')
             setUserId('')
-            navigate('/dash/form3s')
+            navigate('/dash/form4s')
         }
-    }, [isSuccess, navigate])
+    }, [isSuccess, isDelSuccess, navigate])
 
     const onQ1Changed = e => setQ1(e.target.value)
     const onQ2Changed = e => setQ2(e.target.value)
@@ -82,23 +82,21 @@ const NewForm3Form = ({ users }) => {
     const onQ14Changed = e => setQ14(e.target.value)
     const onQ15Changed = e => setQ15(e.target.value)
     const onQ16Changed = e => setQ16(e.target.value)
-    const onQ17Changed = e => setQ17(e.target.value)
-    const onQ18Changed = e => setQ18(e.target.value)
-    const onQ19Changed = e => setQ19(e.target.value)
-    const onQ20Changed = e => setQ20(e.target.value)
-    const onQ21Changed = e => setQ21(e.target.value)
     //const onUserIdChanged = e => setUserId(e.target.value)
 
-    const canSave = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15, q16, q17, q18, q19, q20, q21, userId].every(Boolean) && !isLoading
+    const canSave = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15, q16, userId].every(Boolean) && !isLoading
 
-    const onSaveForm3Clicked = async (e) => {
-        e.preventDefault()
+    const onSaveForm4Clicked = async (e) => {
         if (canSave) {
-            await addNewForm3({ user: userId, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15, q16, q17, q18, q19, q20, q21 })
+            await updateForm4({ id: form4.id, user: userId, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15, q16 })
         }
+    }     
+
+    const onDeleteForm4Clicked = async () => {
+        await deleteForm4({ id: form4.id })
     }
 
-    const errClass = isError ? "errmsg" : "offscreen"
+    const errClass = (isError || isDelError) ? "errmsg" : "offscreen"
     const validQ1Class= !q1 ? "form__input--incomplete" : ''
     const validQ2Class= !q2 ? "form__input--incomplete" : ''
     const validQ3Class= !q3 ? "form__input--incomplete" : ''
@@ -115,36 +113,47 @@ const NewForm3Form = ({ users }) => {
     const validQ14Class= !q14 ? "form__input--incomplete" : ''
     const validQ15Class= !q15 ? "form__input--incomplete" : ''
     const validQ16Class= !q16 ? "form__input--incomplete" : ''
-    const validQ17Class= !q17 ? "form__input--incomplete" : ''
-    const validQ18Class= !q18 ? "form__input--incomplete" : ''
-    const validQ19Class= !q19 ? "form__input--incomplete" : ''
-    const validQ20Class= !q20 ? "form__input--incomplete" : ''
-    const validQ21Class= !q21 ? "form__input--incomplete" : ''
 
+    const errContent = (error?.data?.message || delerror?.data?.message) ?? ''
+
+    let deleteButton = null
+    if (isManager || isAdmin) {
+        deleteButton = (
+            <button
+                className="icon-button"
+                title='Delete'
+                onClick={onDeleteForm4Clicked}
+            >
+                <FontAwesomeIcon icon={faTrashCan} />
+            </button>
+        )
+    }
 
     const content = (
         <>
-            <p className={errClass}>{error?.data?.message}</p>
+            <p className={errClass}>{errContent}</p>
 
-            <form className="form" onSubmit={onSaveForm3Clicked}>
+            <form className="form" onSubmit={e => e.preventDefault()}>
                 <div className="form__title-row">
-                    <h1>New Form3 Income</h1>
+                    <h3>Edit Form4 #{form4.ticket}</h3>
                     <div className="form__action-buttons">
-                        <button
-                            className="form__button"
-                            title="Save"
+                        <button 
+                            className="icon-button"
+                            title='Save'
+                            onClick={onSaveForm4Clicked}
                             disabled={!canSave}
                         >
                             <FontAwesomeIcon icon={faSave} />
                         </button>
+                        {deleteButton}
                     </div>
                 </div>
+
                 <div className="form__title-row">
-                    <h2>Interest and dividends from UK banks and building societies</h2>
+                    <h2>Paying into registered pension schemes and overseas pension schemes</h2>
                 </div>
                 <label className="form__label" htmlFor="q1">
-                    <h3>Q1: Taxed UK interest –</h3> 
-                    the net amount after tax has been taken off - read the notes
+                    <h3>Payments to registered pension schemes where basic rate tax relief will be claimed by your pension provider (called ‘relief at source’). Enter the payments and basic rate tax</h3> 
                 </label>
                 <input
                     className={`form__input ${validQ1Class}`}
@@ -159,8 +168,7 @@ const NewForm3Form = ({ users }) => {
                 />
 
                 <label className="form__label" htmlFor="q2">
-                    <h3>Q2: Untaxed UK interest –</h3> 
-                    amounts which have not had tax taken off - read the notes
+                    <h3>Payments to a retirement annuity contract where basic rate tax relief will not be claimed by your provider</h3> 
                 </label>
                 <input
                     className={`form__input ${validQ2Class}`}
@@ -175,9 +183,8 @@ const NewForm3Form = ({ users }) => {
                 />
 
                 <label className="form__label" htmlFor="q3">
-                    <h3>Q3: Untaxed foreign interest (up to £2,000) –</h3> 
-                    amounts which have not had tax taken off - read the notes
-                </label>
+                    <h3>Q3: Payments to your employer’s scheme which were not deducted from your pay before tax –</h3> 
+                    this will be unusual – read the notes                </label>
                 <input
                     className={`form__input ${validQ3Class}`}
                     id="q3"
@@ -191,8 +198,7 @@ const NewForm3Form = ({ users }) => {
                 />
 
                 <label className="form__label" htmlFor="q4">
-                    <h3>Q4: Dividends from UK companies –</h3> 
-                    the amount received - read the notes
+                    <h3>Q4: Payments to an overseas pension scheme, which is not UK-registered, which are eligible for tax relief and were not deducted from your pay before tax</h3> 
                 </label>
                 <input
                     className={`form__input ${validQ4Class}`}
@@ -206,9 +212,12 @@ const NewForm3Form = ({ users }) => {
                     onChange={onQ4Changed}
                 />
 
+                <div className="form__title-row">
+                    <h2>Charitable giving</h2>
+                </div>
+
                 <label className="form__label" htmlFor="q5">
-                    <h3>Q5: Other dividends –</h3> 
-                    the amount received - read the notes
+                    <h3>Q5: Gift Aid payments made in the year to 5 April 2023</h3> 
                 </label>
                 <input
                     className={`form__input ${validQ5Class}`}
@@ -223,7 +232,7 @@ const NewForm3Form = ({ users }) => {
                 />
 
                 <label className="form__label" htmlFor="q6">
-                    <h3>Q6: Foreign dividends (up to £2,000) –</h3> the amount in sterling after foreign tax was taken off. Do not include this amount in the ‘Foreign’ pages
+                    <h3>Q6: Total of any ‘one-off’ payments in box 5</h3> 
                 </label>
                 <input
                     className={`form__input ${validQ6Class}`}
@@ -238,7 +247,7 @@ const NewForm3Form = ({ users }) => {
                 />
 
                 <label className="form__label" htmlFor="q7">
-                    <h3>Q7: Tax taken off foreign dividends –</h3> the sterling equivalent
+                    <h3>Q7: Gift Aid payments made in the year to 5 April 2023 but treated as if made in the year to 5 April 2022</h3> 
                 </label>
                 <input
                     className={`form__input ${validQ7Class}`}
@@ -252,12 +261,8 @@ const NewForm3Form = ({ users }) => {
                     onChange={onQ7Changed}
                 />
 
-                <div className="form__title-row">
-                    <h2>UK pensions, annuities and other state benefits received</h2>
-                </div>
-
                 <label className="form__label" htmlFor="q8">
-                    <h3>Q8: State Pension –</h3> amount you were entitled to receive in the year, not the weekly or 4-weekly amount - read the notes
+                    <h3>Q8: Gift Aid payments made after 5 April 2023 but to be treated as if made in the year to 5 April 2023</h3> 
                 </label>
                 <input
                     className={`form__input ${validQ8Class}`}
@@ -272,7 +277,7 @@ const NewForm3Form = ({ users }) => {
                 />
 
                 <label className="form__label" htmlFor="q9">
-                    <h3>Q9: State Pension lump sum –</h3> – the gross amount of any lump sum - read the notes
+                    <h3>Q9: Value of qualifying shares or securities gifted to charity</h3> 
                 </label>
                 <input
                     className={`form__input ${validQ9Class}`}
@@ -287,7 +292,7 @@ const NewForm3Form = ({ users }) => {
                 />
 
                 <label className="form__label" htmlFor="q10">
-                    <h3>Q10: Tax taken off box 9</h3>
+                    <h3>Q10: Value of qualifying land and buildings gifted to charity</h3>
                 </label>
                 <input
                     className={`form__input ${validQ10Class}`}
@@ -302,8 +307,7 @@ const NewForm3Form = ({ users }) => {
                 />
 
                 <label className="form__label" htmlFor="q11">
-                    <h3>Q11: Pensions (other than State Pension), retirement annuities and taxable lump sums treated as pensions  –</h3> 
-                    the gross amount. Tax taken off goes in box 12
+                    <h3>Q11:  Value of qualifying investments gifted to non-UK charities in boxes 9 and 10</h3> 
                 </label>
                 <input
                     className={`form__input ${validQ11Class}`}
@@ -318,7 +322,7 @@ const NewForm3Form = ({ users }) => {
                 />
 
                 <label className="form__label" htmlFor="q12">
-                    <h3>Q12: Tax taken off box 11</h3> 
+                    <h3>Q12: Gift Aid payments to non-UK charities in box 5</h3> 
                 </label>
                 <input
                     className={`form__input ${validQ12Class}`}
@@ -332,152 +336,65 @@ const NewForm3Form = ({ users }) => {
                     onChange={onQ12Changed}
                 />
 
+                <div className="form__title-row">
+                    <h2>Blind Person's Allowance</h2>
+                </div>
+
                 <label className="form__label" htmlFor="q13">
-                    <h3>Q13: Taxable Incapacity Benefit and contribution-based Employment and Support Allowance –</h3> 
-                    read the notes
+                    <h3>Q13: If you’re registered blind, or severely sight impaired, and your name is on a local authority or other register, put ‘X’ in the box</h3> 
                 </label>
                 <input
-                    className={`form__input ${validQ13Class}`}
+                    className={`form__checkbox ${validQ13Class}`}
                     id="q13"
                     name="q13"
-                    type="number"
+                    type="checkbox"
                     autoComplete="off"
-                    placeholder="£00000.00"
-                    step={0.01}
                     value={q13}
                     onChange={onQ13Changed}
                 />
 
                 <label className="form__label" htmlFor="q14">
-                    <h3>Q14: Tax taken off Incapacity Benefit in box 13</h3> 
+                    <h3>Enter the name of the local authority or other register</h3> 
                 </label>
                 <input
                     className={`form__input ${validQ14Class}`}
                     id="q14"
                     name="q14"
-                    type="number"
-                    autoComplete="off"
-                    placeholder="£00000.00"
-                    step={0.01}
                     value={q14}
                     onChange={onQ14Changed}
                 />
 
                 <label className="form__label" htmlFor="q15">
-                    <h3>Q15: Jobseeker's Allowance</h3> 
+                    <h3>Q15: If you want your spouse’s, or civil partner’s, surplus allowance, put ‘X’ in the box</h3> 
                 </label>
                 <input
-                    className={`form__input ${validQ15Class}`}
+                    className={`form__checkbox ${validQ15Class}`}
                     id="q15"
                     name="q15"
-                    type="number"
+                    type="checkbox"
                     autoComplete="off"
-                    placeholder="£00000.00"
-                    step={0.01}
                     value={q15}
                     onChange={onQ15Changed}
                 />
 
                 <label className="form__label" htmlFor="q16">
-                    <h3>Q16: Total of any other taxable State Pensions and benefits</h3> 
+                    <h3>Q16: If you want your spouse, or civil partner, to have your surplus allowance, put ‘X’ in the box</h3> 
                 </label>
                 <input
-                    className={`form__input ${validQ16Class}`}
+                    className={`form__checkbox ${validQ16Class}`}
                     id="q16"
                     name="q16"
-                    type="number"
-                    autoComplete="off"
-                    placeholder="£00000.00"
-                    step={0.01}
+                    type="checkbox"
                     value={q16}
                     onChange={onQ16Changed}
                 />
-
-                <div className="form__title-row">
-                    <h2>Other UK income not included on supplementary pages</h2>
-                    Do not use this section for income that should be returned on supplementary pages. Share schemes, gilts, stock dividends, life insurance gains and certain other kinds of income go on the ‘Additional information’ pages.
-                </div>
-
-                <label className="form__label" htmlFor="q17">
-                    <h3>Q17: Other taxable income –</h3> before expenses and taxtaken off
-                </label>
-                <input
-                    className={`form__input ${validQ17Class}`}
-                    id="q17"
-                    name="q17"
-                    type="number"
-                    autoComplete="off"
-                    placeholder="£00000000.00"
-                    step={0.01}
-                    value={q17}
-                    onChange={onQ17Changed}
-                />
-
-                <label className="form__label" htmlFor="q18">
-                    <h3>Q18: Total amount of allowable expenses –</h3> read the notes
-                </label>
-                <input
-                    className={`form__input ${validQ18Class}`}
-                    id="q18"
-                    name="q18"
-                    type="number"
-                    autoComplete="off"
-                    placeholder="£00000000.00"
-                    step={0.01}
-                    value={q18}
-                    onChange={onQ18Changed}
-                />
-
-                <label className="form__label" htmlFor="q19">
-                    <h3>Q19: Any tax taken off box 17</h3> 
-                </label>
-                <input
-                    className={`form__input ${validQ19Class}`}
-                    id="q19"
-                    name="q19"
-                    type="number"
-                    autoComplete="off"
-                    placeholder="£00000000.00"
-                    step={0.01}
-                    value={q19}
-                    onChange={onQ19Changed}
-                />
-
-                <label className="form__label" htmlFor="q20">
-                    <h3>Q20: Benefit from pre-owned assets –</h3> read the notes
-                </label>
-                <input
-                    className={`form__input ${validQ20Class}`}
-                    id="q20"
-                    name="q20"
-                    type="number"
-                    autoComplete="off"
-                    placeholder="£00000000.00"
-                    step={0.01}
-                    value={q20}
-                    onChange={onQ20Changed}
-                />
-
-                <label className="form__label" htmlFor="q21">
-                    <h3>Q21: Description of income in boxes 17 and 20 –</h3> if there’s not enough space here please give details in the ‘Any other information’ box, box 19, on page TR 7
-                </label>
-                <input
-                    className={`form__input ${validQ21Class}`}
-                    id="q21"
-                    name="q21"
-                    type="number"
-                    autoComplete="off"
-                    placeholder="£00000000.00"
-                    step={0.01}
-                    value={q21}
-                    onChange={onQ21Changed}
-                />
                 
-            </form>    
+            </form>   
         </>
     )
 
     return content
 }
 
-export default NewForm3Form
+export default EditForm4Form
+

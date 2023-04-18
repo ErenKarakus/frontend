@@ -26,7 +26,6 @@ const Form4sList = () => {
     if (isLoading) content = <PulseLoader color={"#FFF"} />
 
     if (isError) {
-        console.log("Error object:", error);
         content = <p className="errmsg">{error?.data?.message}</p>
     }
 
@@ -43,13 +42,13 @@ const Form4sList = () => {
         const tableContent = ids?.length && filteredIds.map(form4Id => <Form4 key={form4Id} form4Id={form4Id} />)
 
         content = (
-            <table className="table table--form4s">
+            <table className="table table--form1">
                 <thead className="table__thead">
                     <tr>
-                        <th scope="col" className="table__th form4__created">Created</th>
-                        <th scope="col" className="table__th form4__updated">Updated</th>
-                        <th scope="col" className="table__th form4__username">Owner</th>
-                        <th scope="col" className="table__th form4__edit">Edit</th>
+                        <th scope="col" className="table__th form1__username">Owner</th>
+                        <th scope="col" className="table__th form1__created">Created</th>
+                        <th scope="col" className="table__th form1__updated">Updated</th>
+                        <th scope="col" className="table__th form1__edit">Edit</th>
                     </tr>
                 </thead>
                 <tbody>

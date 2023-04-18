@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom"
 import { useAddNewForm2Mutation } from "./form2sApiSlice"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave } from "@fortawesome/free-solid-svg-icons"
+import useAuth from "../../hooks/useAuth"
 
 const NewForm2Form = ({ users }) => {
+
+    const { isAdmin, isManager } = useAuth()
 
     const [addNewForm2, {
         isLoading,
@@ -51,7 +54,7 @@ const NewForm2Form = ({ users }) => {
     const onQ7Changed = e => setQ7(e.target.value)
     const onQ8Changed = e => setQ8(e.target.value)
     const onQ9Changed = e => setQ9(e.target.value)
-    //const onUserIdChanged = e => setUserId(e.target.value)
+    const onUserIdChanged = e => setUserId(e.target.value)
 
     const canSave = [q1, q2, q3, q4, q5, q6, q7, q8, q9, userId].every(Boolean) && !isLoading
 
@@ -61,6 +64,15 @@ const NewForm2Form = ({ users }) => {
             await addNewForm2({ user: userId, q1, q2, q3, q4, q5, q6, q7, q8, q9 })
         }
     }
+    
+    const options = users.map(user => {
+        return (
+            <option
+                key={user.id}
+                value={user.id}
+            > {user.username}</option>
+        )
+    })
 
     const errClass = isError ? "errmsg" : "offscreen"
     const validQ1Class= !q1 ? "form__input--incomplete" : ''
@@ -263,6 +275,22 @@ const NewForm2Form = ({ users }) => {
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                 </select>
+                { (isAdmin || isManager) && (
+                    <>
+                        <label className="form__label" htmlFor="user">
+                            User
+                        </label>
+                        <select
+                            className="form__input"
+                            id="user"
+                            name="user"
+                            value={userId}
+                            onChange={onUserIdChanged}
+                        >
+                            {options}
+                        </select>
+                    </>
+                )}
 
 
             </form>    

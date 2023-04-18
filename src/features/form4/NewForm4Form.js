@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom"
 import { useAddNewForm4Mutation } from "./form4sApiSlice"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave } from "@fortawesome/free-solid-svg-icons"
+import useAuth from "../../hooks/useAuth"
 
 const NewForm4Form = ({ users }) => {
+
+    const { isAdmin, isManager } = useAuth()
 
     const [addNewForm4, {
         isLoading,
@@ -72,7 +75,7 @@ const NewForm4Form = ({ users }) => {
     const onQ14Changed = e => setQ14(e.target.value)
     const onQ15Changed = e => setQ15(e.target.checked)
     const onQ16Changed = e => setQ16(e.target.checked)
-    //const onUserIdChanged = e => setUserId(e.target.value)
+    const onUserIdChanged = e => setUserId(e.target.value)
 
     const canSave = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15, q16, userId].every(Boolean) && !isLoading
 
@@ -82,6 +85,15 @@ const NewForm4Form = ({ users }) => {
             await addNewForm4({ user: userId, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15, q16 })
         }
     }
+
+    const options = users.map(user => {
+        return (
+            <option
+                key={user.id}
+                value={user.id}
+            > {user.username}</option>
+        )
+    })
 
     const errClass = isError ? "errmsg" : "offscreen"
     const validQ1Class= !q1 ? "form__input--incomplete" : ''
@@ -358,8 +370,22 @@ const NewForm4Form = ({ users }) => {
                     value={q16}
                     onChange={onQ16Changed}
                 />
-
-                
+                { (isAdmin || isManager) && (
+                    <>
+                        <label className="form__label" htmlFor="user">
+                            User
+                        </label>
+                        <select
+                            className="form__input"
+                            id="user"
+                            name="user"
+                            value={userId}
+                            onChange={onUserIdChanged}
+                        >
+                            {options}
+                        </select>
+                    </>
+                )}                
             </form>    
         </>
     )

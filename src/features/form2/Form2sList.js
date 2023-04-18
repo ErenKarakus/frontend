@@ -42,13 +42,13 @@ const Form2sList = () => {
         const tableContent = ids?.length && filteredIds.map(form2Id => <Form2 key={form2Id} form2Id={form2Id} />)
 
         content = (
-            <table className="table table--form2s">
+            <table className="table table--form1">
                 <thead className="table__thead">
                     <tr>
-                        <th scope="col" className="table__th form2__created">Created</th>
-                        <th scope="col" className="table__th form2__updated">Updated</th>
-                        <th scope="col" className="table__th form2__username">Owner</th>
-                        <th scope="col" className="table__th form2__edit">Edit</th>
+                        <th scope="col" className="table__th form1__username">Owner</th>
+                        <th scope="col" className="table__th form1__created">Created</th>
+                        <th scope="col" className="table__th form1__updated">Updated</th>
+                        <th scope="col" className="table__th form1__edit">Edit</th>
                     </tr>
                 </thead>
                 <tbody>

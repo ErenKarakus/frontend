@@ -18,9 +18,9 @@ const Form1 = ({ form1Id }) => {
     const navigate = useNavigate()
 
     if (form1) {
-        const created = new Date(form1.createdAt).toLocaleString('en-GB', { day: 'numeric', month: 'long' })
+        const created = new Date(form1.createdAt).toLocaleString('en-GB')
 
-        const updated = new Date(form1.updatedAt).toLocaleString('en-GB', { day: 'numeric', month: 'long' })
+        const updated = new Date(form1.updatedAt).toLocaleString('en-GB')
 
         const handleEdit = () => navigate(`/dash/form1s/${form1Id}`)
 

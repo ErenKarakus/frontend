@@ -12,17 +12,17 @@ const Form3 = ({ form3Id }) => {
     const navigate = useNavigate()
 
     if (form3) {
-        const created = new Date(form3.createdAt).toLocaleString('en-GB', { day: 'numeric', month: 'long' })
+        const created = new Date(form3.createdAt).toLocaleString('en-GB')
 
-        const updated = new Date(form3.updatedAt).toLocaleString('en-GB', { day: 'numeric', month: 'long' })
+        const updated = new Date(form3.updatedAt).toLocaleString('en-GB')
 
         const handleEdit = () => navigate(`/dash/form3s/${form3Id}`)
 
         return (
             <tr className="table__row">
-                <td className="table__cell form3__created">{created}</td>
-                <td className="table__cell form3__updated">{updated}</td>
-                <td className="table__cell form3__username">{form3.q3}</td>
+                <td className="table__cell form__username">{form3.username}</td>
+                <td className="table__cell form__created">{created}</td>
+                <td className="table__cell form__updated">{updated}</td>
                 
                 <td className="table__cell">
                     <button

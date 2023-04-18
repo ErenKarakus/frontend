@@ -7,7 +7,7 @@ import useAuth from '../../hooks/useAuth'
 
 const EditForm1Form = ({ form1, users }) => {
 
-    const  { isManager, isAdmin } = useAuth()
+    const  { user, isManager, isAdmin } = useAuth()
 
     const [updateForm1, {
         isLoading,
@@ -69,36 +69,7 @@ const EditForm1Form = ({ form1, users }) => {
         if (canSave) {
             await updateForm1({ id: form1.id, user: userId, q1, q2, q3a, q3b, q3c, q3d, q3e, q4, q5 })
         }
-    }   
-
-    // const canSave = [q1 !== form1.q1 || q2 !== form1.q2 || q3a !== form1.q3a || q3b !== form1.q3b || q3c !== form1.q3c || q3d !== form1.q3d || q3e !== form1.q3e || q4 !== form1.q4 || q5 !== form1.q5 || userId].every(Boolean) && !isLoading
-
-    // const onSaveForm1Clicked = async (e) => {
-    //     if (canSave) {
-    //         await updateForm1({ id: form1.id, q1, q2, q3a, q3b, q3c, q3d, q3e, q4, q5 })
-    //     }
-    // }
-
-    // const hasChanges = q1 !== form1.q1 || q2 !== form1.q2 || q3a !== form1.q3a || q3b !== form1.q3b || q3c !== form1.q3c || q3d !== form1.q3d || q3e !== form1.q3e || q4 !== form1.q4 || q5 !== form1.q5 || userId !== form1.user;
-
-    // const canSave = hasChanges && !isLoading;
-
-    // const onSaveForm1Clicked = async (e) => {
-    //     const updatedFields = {};
-    //     if (q1 !== form1.q1) updatedFields.q1 = q1;
-    //     if (q2 !== form1.q2) updatedFields.q2 = q2;
-    //     if (q3a !== form1.q3a) updatedFields.q3a = q3a;
-    //     if (q3b !== form1.q3b) updatedFields.q3b = q3b;
-    //     if (q3c !== form1.q3c) updatedFields.q3c = q3c;
-    //     if (q3d !== form1.q3d) updatedFields.q3d = q3d;
-    //     if (q3e !== form1.q3e) updatedFields.q3e = q3e;
-    //     if (q4 !== form1.q4) updatedFields.q4 = q4;
-    //     if (q5 !== form1.q5) updatedFields.q5 = q5;
-    //     if (userId !== form1.user) updatedFields.userId = userId;
-    
-    //     await updateForm1({ id: form1.id, ...updatedFields });
-    // }
-    
+    }     
 
 
     const onDeleteForm1Clicked = async () => {
@@ -127,8 +98,13 @@ const EditForm1Form = ({ form1, users }) => {
 
     const errContent = (error?.data?.message || delerror?.data?.message) ?? ''
 
+    console.log('username:', user)
+    console.log('form1.user:', form1.user)
+    console.log('isManager:', isManager)
+    console.log('isAdmin:', isAdmin)
     let deleteButton = null
-    if (isManager || isAdmin) {
+    
+    if (isManager || isAdmin || (form1.user === user.id)) {
         deleteButton = (
             <button
                 className="icon-button"

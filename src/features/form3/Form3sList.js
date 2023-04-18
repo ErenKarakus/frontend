@@ -26,7 +26,6 @@ const Form3sList = () => {
     if (isLoading) content = <PulseLoader color={"#FFF"} />
 
     if (isError) {
-        console.log("Error object:", error);
         content = <p className="errmsg">{error?.data?.message}</p>
     }
 
@@ -43,13 +42,13 @@ const Form3sList = () => {
         const tableContent = ids?.length && filteredIds.map(form3Id => <Form3 key={form3Id} form3Id={form3Id} />)
 
         content = (
-            <table className="table table--form3s">
+            <table className="table table--form1">
                 <thead className="table__thead">
                     <tr>
-                        <th scope="col" className="table__th form3__created">Created</th>
-                        <th scope="col" className="table__th form3__updated">Updated</th>
-                        <th scope="col" className="table__th form3__username">Owner</th>
-                        <th scope="col" className="table__th form3__edit">Edit</th>
+                        <th scope="col" className="table__th form1__username">Owner</th>
+                        <th scope="col" className="table__th form1__created">Created</th>
+                        <th scope="col" className="table__th form1__updated">Updated</th>
+                        <th scope="col" className="table__th form1__edit">Edit</th>
                     </tr>
                 </thead>
                 <tbody>

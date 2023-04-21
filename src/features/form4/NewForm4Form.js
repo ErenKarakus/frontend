@@ -135,7 +135,7 @@ const NewForm4Form = ({ users }) => {
                     <h2>Paying into registered pension schemes and overseas pension schemes</h2>
                 </div>
                 <label className="form__label" htmlFor="q1">
-                    <h3>Payments to registered pension schemes where basic rate tax relief will be claimed by your pension provider (called ‘relief at source’). Enter the payments and basic rate tax</h3> 
+                    <h3>Q1: Payments to registered pension schemes where basic rate tax relief will be claimed by your pension provider (called ‘relief at source’). Enter the payments and basic rate tax</h3> 
                 </label>
                 <input
                     className={`form__input ${validQ1Class}`}
@@ -150,7 +150,7 @@ const NewForm4Form = ({ users }) => {
                 />
 
                 <label className="form__label" htmlFor="q2">
-                    <h3>Payments to a retirement annuity contract where basic rate tax relief will not be claimed by your provider</h3> 
+                    <h3>Q2: Payments to a retirement annuity contract where basic rate tax relief will not be claimed by your provider</h3> 
                 </label>
                 <input
                     className={`form__input ${validQ2Class}`}

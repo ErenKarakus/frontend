@@ -19,8 +19,16 @@
 //             <h1>Welcome {username}!</h1>
 
 //             <p><Link to="/dash/form1s">View Form1s</Link></p>
-
 //             <p><Link to="/dash/form1s/new">Add New Form1</Link></p>
+
+//             <p><Link to="/dash/form2s">View Form2s</Link></p>
+//             <p><Link to="/dash/form2s/new">Add New Form2</Link></p>
+
+//             <p><Link to="/dash/form3s">View Form3s</Link></p>
+//             <p><Link to="/dash/form3s/new">Add New Form3</Link></p>
+
+//             <p><Link to="/dash/form4s">View Form4s</Link></p>
+//             <p><Link to="/dash/form4s/new">Add New Form4</Link></p>
             
 //             {(isManager || isAdmin) && <p><Link to="/dash/users">View User Settings</Link></p>}
 
@@ -41,7 +49,13 @@ import useTitle from '../../hooks/useTitle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { 
   faFileCirclePlus,
-  faFolderOpen
+  faFolderOpen,
+  fa1,
+  fa2,
+  fa3,
+  fa4,
+  faUserGear,
+  faUserPlus
 } from "@fortawesome/free-solid-svg-icons"
 
 const Welcome = () => {
@@ -62,15 +76,15 @@ const Welcome = () => {
 
         <div className="grid-container">
         <div className="grid-item">
-          <h1>FORM 1</h1>
+          <FontAwesomeIcon icon={fa1} />
           <p>
-            View Form1s
+            <h4>View Form1s</h4>
             <Link to="/dash/form1s" className='icon-button'>
               <FontAwesomeIcon icon={faFolderOpen}/>            
             </Link>
           </p>
           <p>
-            Add New Form1
+            <h4>Add New Form1</h4>
             <Link to="/dash/form1s/new" className='icon-button'>
               <FontAwesomeIcon icon={faFileCirclePlus}/>
             </Link>
@@ -78,39 +92,66 @@ const Welcome = () => {
         </div>
 
         <div className="grid-item">
+          <FontAwesomeIcon icon={fa2} />
           <p>
-            <Link to="/dash/form2s">View Form2s</Link>
+            <h4>View Form2s</h4>
+            <Link to="/dash/form2s" className='icon-button'>
+              <FontAwesomeIcon icon={faFolderOpen}/>            
+            </Link>
           </p>
           <p>
-            <Link to="/dash/form2s/new">Add New Form2</Link>
+            <h4>Add New Form2</h4>
+            <Link to="/dash/form2s/new" className='icon-button'>
+              <FontAwesomeIcon icon={faFileCirclePlus}/>
+            </Link>
           </p>
         </div>
         
         <div className="grid-item">
+          <FontAwesomeIcon icon={fa3} />
           <p>
-            <Link to="/dash/form3s">View Form3s</Link>
+            <h4>View Form3s</h4>
+            <Link to="/dash/form3s" className='icon-button'>
+              <FontAwesomeIcon icon={faFolderOpen}/>            
+            </Link>
           </p>
           <p>
-            <Link to="/dash/form3s/new">Add New Form3</Link>
+            <h4>Add New Form3</h4>
+            <Link to="/dash/form3s/new" className='icon-button'>
+              <FontAwesomeIcon icon={faFileCirclePlus}/>
+            </Link>
           </p>
         </div>
 
         <div className="grid-item">
+          <FontAwesomeIcon icon={fa4} />
           <p>
-            <Link to="/dash/form4s">View Form4s</Link>
+            <h4>View Form4s</h4>
+            <Link to="/dash/form4s" className='icon-button'>
+              <FontAwesomeIcon icon={faFolderOpen}/>            
+            </Link>
           </p>
           <p>
-            <Link to="/dash/form4s/new">Add New Form4</Link>
+            <h4>Add New Form4</h4>
+            <Link to="/dash/form4s/new" className='icon-button'>
+              <FontAwesomeIcon icon={faFileCirclePlus}/>
+            </Link>
           </p>
         </div>
 
         {(isManager || isAdmin) && (
           <div className="grid-item">
             <p>
-              <Link to="/dash/users">View User Settings</Link>
+              <h4>View User Settings</h4>
+              <Link to="/dash/users" className='icon-button'>
+                <FontAwesomeIcon icon={faUserGear} />
+              </Link>
             </p>
             <p>
-              <Link to="/dash/users/new">Add New User</Link>
+              <h4>Add New User</h4>
+              <Link to="/dash/users/new" className='icon-button'>
+                <FontAwesomeIcon icon={faUserPlus} />
+              </Link>
             </p>
           </div>
         )}

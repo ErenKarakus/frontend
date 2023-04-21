@@ -70,7 +70,7 @@ body {
   min-height: 100vh;
   background-color: var(--BGCOLOR);
   color: var(--COLOR);
-  background-image: url('./img/background.jpg');
+  background-image: url('./img/pxfuel.jpg');
   background-size: cover;
   background-position: top right;
   background-blend-mode: multiply;
@@ -145,7 +145,7 @@ a:focus-visible {
 }
 
 .dash-header__container {
-  display: flex;
+  display: contents;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
@@ -202,6 +202,8 @@ tr {
   grid-template-columns: 1fr 2fr 1fr;
   color: var(--TABLE-COLOR);
   gap: 0.1em;
+  
+  
 }
 
 .table__button {
